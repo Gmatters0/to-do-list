@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="">
+    <link rel="stylesheet" href="style.css">
+    <title>To Do List - Javascript</title>
+</head>
+<body>
+    <main>
+        <h1>Lista de Tarefas</h1>
+        <section id="create-todo-section">
+            <form id="create-todo-form">
+                <input 
+                    type="text"
+                    id="description" 
+                    name="description"
+                    class="input-description"
+                    aria-label="Qual tarefa quer adicionar?" 
+                    placeholder="Qual tarefa quer adicionar?" 
+                />
+                <button type="submit" aria-label="Cadastrar tarefa" class="add-task-btn">+</button>
+            </form>
+        </section>
+        <section class="todo-list-section">
+            <ul id="todo-list"></ul>
+        </section>
+        <footer>
+            <p id="done-counter">0/0 Concluídas</p>
+            <button onclick="removeDoneTasks()" class="remove-done-tasks-btn">Remover Tasks Concluídas</button>
+        </footer>
+    </main>
+</body>
+<script src="index.js"></script>
+</html>
