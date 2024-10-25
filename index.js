@@ -7,19 +7,18 @@ const setTasksInLocalStorage = (tasks) => {
     window.localStorage.setItem('tasks', JSON.stringify(tasks))
 }
 
-const tasksCounter = () =>{
-    console.log(document.getElementById('done-counter').innerText)
-    const tasks = getTasksFromLocalStorage()
-    const doneTasks = tasks.filter(({ checked }) => checked)
+const tasksCounter = (tasks) =>{
+    const doneTasks = tasks.filter(({ checked }) => checked).length
+    const totalTasks = tasks.length
 
-    document.getElementById('done-counter').innerText = `${doneTasks.length}/${tasks.length} Concluídas`
+    document.getElementById('done-counter').innerText = `${doneTasks}/${totalTasks} Concluídas`
 }
 
 const removeTask = (taskId) => {
     const tasks = getTasksFromLocalStorage()
     const updatedTasks = tasks.filter(({ id }) => parseInt(id) !== parseInt(taskId))
     setTasksInLocalStorage(updatedTasks)
-    tasksCounter()
+    tasksCounter(updatedTasks)
 
     document
         .getElementById("todo-list")
@@ -34,7 +33,7 @@ const removeDoneTasks = () => {
         
     const updatedTasks = tasks.filter(({ checked }) => !checked)
     setTasksInLocalStorage(updatedTasks)
-    tasksCounter()
+    tasksCounter(updatedTasks)
 
     tasksToRemove.forEach((taskToRemove) => {
         document
@@ -72,7 +71,7 @@ const onCheckboxClick = (event) => {
     })
 
     setTasksInLocalStorage(updatedTasks)
-    tasksCounter()
+    tasksCounter(updatedTasks)
 }
 
 const getCheckboxInput = ({ id, description, checked }) => {
@@ -123,7 +122,7 @@ const createTask = (event) => {
         {id: newTaskData.id, description: newTaskData.description, checked: false}
     ]
     setTasksInLocalStorage(updatedTasks)
-    tasksCounter()
+    tasksCounter(updatedTasks)
 
     document.getElementById('description').value = ''
 }
@@ -132,7 +131,7 @@ window.onload = function() {
     const form = document.getElementById('create-todo-form')
     form.addEventListener('submit', createTask)
 
-    tasksCounter()
+    tasksCounter(updatedTasks)
 
     const tasks = getTasksFromLocalStorage()
 
